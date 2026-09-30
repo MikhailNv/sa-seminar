@@ -1,0 +1,247 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="eFN8PApjRGSyfyqEBFol">
+    <mxGraphModel dx="1868" dy="364" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <UserObject label="" plantUmlData="{&#xa;  &quot;data&quot;: &quot;@startuml\nskinparam componentStyle rectangle\nskinparam backgroundColor #FEFEFE\nskinparam shadowing false\nskinparam defaultFontName Arial\nskinparam packageStyle rectangle\n\ntitle SuperSurance Architecture - Exercise 1: Integrations &amp; Multi-channel\n\n&#39; --- Каналы продаж ---\npackage \&quot;Каналы подачи заявок (Clients)\&quot; #F8F9FA {\n    [Сайт\\n(Web)] as site\n    [Мобильное\\nприложение] as mobile\n    [Партнерская\\nсеть продаж] as partners\n}\n\n&#39; --- Точка входа ---\npackage \&quot;Точка входа (Entry Point)\&quot; #FFF3CD {\n    [API Gateway] as gw\n    note right of gw\n        Маршрутизация, Rate Limiting,\n        Базовая аутентификация,\n        Унификация запросов\n    end note\n}\n\n&#39; --- Ядро системы (Монолит) ---\npackage \&quot;SuperSurance Core Application (Монолит)\&quot; #D4EDDA {\n    \n    [API Layer / Контроллеры] as api\n    \n    package \&quot;Бизнес-логика (Core Domain)\&quot; {\n        [Движок расчета\\nпремий (Calc Engine)] as calc #28A745\n        [Внутренняя модель\\nданных (Domain Model)] as domain\n    }\n\n    package \&quot;Интеграционный модуль (Integration Layer)\&quot; #CCE5FF {\n        [Anti-Corruption Layer (ACL)] as acl\n        note right of acl\n            Изоляция контекста:\n            Маппинг внешних DTO\n            во внутренние модели\n        end note\n        \n        [Клиенты партнерских API\\n(Partner API Clients)] as clients\n    }\n\n    [Менеджер кэша\\n(Cache Manager)] as cache_mgr #E2E3E5\n}\n\n&#39; --- Инфраструктура ---\npackage \&quot;Инфраструктура\&quot; #F8D7DA {\n    [Распределенный кэш\\n(Redis / Memcached)] as cache_db\n    note bottom of cache_db\n        Хранение ответов партнеров\\n(TTL: 24-48 часов)\\nдля экономии бюджета\n    end note\n}\n\n&#39; --- Внешние партнеры ---\npackage \&quot;Внешние платные сервисы (Partner APIs)\&quot; #E2E3E5 {\n    [История ремонта ТС] as p1\n    [Рыночная стоимость ТС] as p2\n    [История штрафов] as p3\n    [Антифрод система] as p4\n}\n\n&#39; --- Связи (Каналы -&gt; Gateway) ---\nsite --&gt; gw : HTTPS\nmobile --&gt; gw : HTTPS\npartners --&gt; gw : HTTPS/API\n\n&#39; --- Связи (Gateway -&gt; Монолит) ---\ngw --&gt; api : HTTP/REST\n\n&#39; --- Внутренние связи Монолита ---\napi --&gt; calc\ncalc --&gt; domain\ncalc --&gt; cache_mgr : 1. Проверить кэш\n\ncache_mgr --&gt; cache_db : 2. Read/Write\n\ncache_mgr --&gt; clients : 3. Если кэш-мисс, запросить данные\nclients --&gt; acl : Получить \&quot;сырые\&quot; DTO\nacl --&gt; domain : 4. Трансформировать в Domain Model\n\n&#39; --- Связи с партнерами ---\nacl --&gt; p1 : HTTPS API Call\nacl --&gt; p2 : HTTPS API Call\nacl --&gt; p3 : HTTPS API Call\nacl --&gt; p4 : HTTPS API Call\n\n@enduml&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="-sm1lzMmFYTxV1t-nR-4-78">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
+            <mxGeometry as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Каналы подачи заявок (Clients)" plantUmlId="c_0" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#F8F9FA;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Каналы подачи заявок (Clients)" id="-sm1lzMmFYTxV1t-nR-4-79">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#F8F9FA;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="95" width="439.3" x="162.60999999999999" y="1170" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Сайт" plantUmlId="n_1" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Сайт&#xa;(Web)" id="-sm1lzMmFYTxV1t-nR-4-80">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-79" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="33.91" width="64.57" x="54.24" y="36.09" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Мобильное&#xa;приложение" plantUmlId="n_2" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Мобильное&#xa;приложение" id="-sm1lzMmFYTxV1t-nR-4-81">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-79" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="33.91" width="103.46" x="304.24" y="36.09" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Партнерская&#xa;сеть продаж" plantUmlId="n_3" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Партнерская&#xa;сеть продаж" id="-sm1lzMmFYTxV1t-nR-4-82">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-79" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="33.91" width="124.57" x="149.24" y="36.09" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Точка входа" plantUmlId="c_4" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#FFF3CD;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Точка входа (Entry Point)" id="-sm1lzMmFYTxV1t-nR-4-83">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#FFF3CD;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="95" width="204.51" x="280.005" y="1310" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="API Gateway" plantUmlId="n_5" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="API Gateway" id="-sm1lzMmFYTxV1t-nR-4-84">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-83" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="49" width="119" x="42.754999999999995" y="34" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="SuperSurance Core Application (Монолит)" plantUmlId="c_6" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#D4EDDA;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="SuperSurance Core Application (Монолит)" id="-sm1lzMmFYTxV1t-nR-4-85">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=light-dark(#FAFBFF,#003333);strokeColor=light-dark(#181818,#003333);verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;container=0;" vertex="1">
+            <mxGeometry height="850" width="621.13" x="83.51" y="1470" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Инфраструктура" plantUmlId="c_15" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#F8D7DA;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Инфраструктура" id="-sm1lzMmFYTxV1t-nR-4-94">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#F8D7DA;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="95" width="208" x="760" y="1810" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Распределенный кэш&#xa;(Redis / Memcached)" plantUmlId="n_16" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Распределенный кэш&#xa;(Redis / Memcached)" id="-sm1lzMmFYTxV1t-nR-4-95">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-94" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="49" width="178" x="15" y="34" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="HTTPS" plantUmlId="e_23" plantUmlBaseStyle="strokeColor=#181818;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="HTTPS" id="-sm1lzMmFYTxV1t-nR-4-102">
+          <mxCell edge="1" parent="-sm1lzMmFYTxV1t-nR-4-78" source="-sm1lzMmFYTxV1t-nR-4-79" style="strokeColor=#181818;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;startArrow=classicThin;startFill=1;startSize=6;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="-sm1lzMmFYTxV1t-nR-4-84">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="HTTP/REST" plantUmlId="e_25" plantUmlBaseStyle="strokeColor=#181818;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="HTTP/REST" id="-sm1lzMmFYTxV1t-nR-4-104">
+          <mxCell edge="1" parent="-sm1lzMmFYTxV1t-nR-4-78" source="-sm1lzMmFYTxV1t-nR-4-84" style="strokeColor=#181818;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;startArrow=classicThin;startFill=1;startSize=6;" target="-sm1lzMmFYTxV1t-nR-4-86">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="2. Получить кеш" plantUmlId="e_29" plantUmlBaseStyle="strokeColor=#181818;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="2. Read/Write" id="-sm1lzMmFYTxV1t-nR-4-108">
+          <mxCell edge="1" parent="-sm1lzMmFYTxV1t-nR-4-78" source="-sm1lzMmFYTxV1t-nR-4-87" style="strokeColor=light-dark(#181818,#FF9933);fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;startArrow=classicThin;startFill=1;startSize=6;" target="-sm1lzMmFYTxV1t-nR-4-95">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Маршрутизация, Rate Limiting,&#xa;Базовая аутентификация,&#xa;Унификация запросов" plantUmlId="note_37" plantUmlBaseStyle="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Маршрутизация, Rate Limiting,&#xa;Базовая аутентификация,&#xa;Унификация запросов" id="-sm1lzMmFYTxV1t-nR-4-116">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="56" width="205" x="477.26" y="1341" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="noteptr_38" plantUmlBaseStyle="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=west;" plantUmlBaseValue="" id="-sm1lzMmFYTxV1t-nR-4-117">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=west;" vertex="1">
+            <mxGeometry height="8" width="36.5" x="441.76" y="1365" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Хранение ответов партнеров&#xa;(TTL: 24-48 часов)&#xa;для экономии бюджета" plantUmlId="note_41" plantUmlBaseStyle="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Хранение ответов партнеров&#xa;(TTL: 24-48 часов)&#xa;для экономии бюджета" id="-sm1lzMmFYTxV1t-nR-4-120">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="56" width="203" x="1000" y="1810" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="noteptr_42" plantUmlBaseStyle="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=north;" plantUmlBaseValue="" id="-sm1lzMmFYTxV1t-nR-4-121">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=north;rotation=-90;" vertex="1">
+            <mxGeometry height="36.5" width="8" x="982.25" y="1819.75" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="SuperSurance Architecture - Упражнение 1: Интеграция с источниками данных" plantUmlId="title_43" plantUmlBaseStyle="text;html=1;fillColor=none;strokeColor=none;fontSize=14;fontStyle=1;fontColor=#000000;align=center;verticalAlign=middle;fontFamily=Arial;" plantUmlBaseValue="SuperSurance Architecture - Exercise 1: Integrations &amp;amp; Multi-channel" id="-sm1lzMmFYTxV1t-nR-4-122">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="text;html=1;fillColor=none;strokeColor=none;fontSize=14;fontStyle=1;fontColor=#000000;align=center;verticalAlign=middle;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="24" width="505" x="140" y="1120" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="API Layer / Контроллеры" plantUmlId="n_7" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="API Layer / Контроллеры" id="-sm1lzMmFYTxV1t-nR-4-86">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="45.65217391304348" width="339.93269204190506" x="213.4886539790475" y="1501.6770186335405" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Бизнес-логика" plantUmlId="c_9" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=none;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Бизнес-логика (Core Domain)" id="-sm1lzMmFYTxV1t-nR-4-88">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=none;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="220.80745341614906" width="391.88" x="187.52" y="1603.2298136645963" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Движок расчета&#xa;премий" plantUmlId="n_10" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#28A745;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Движок расчета&#xa;премий (Calc Engine)" id="-sm1lzMmFYTxV1t-nR-4-89">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-88" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=light-dark(#28A745,#271D00);strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="53.03708439897699" width="288.5311329736591" x="51.674433513170435" y="36.80124223602484" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-125" edge="1" parent="-sm1lzMmFYTxV1t-nR-4-88" source="-sm1lzMmFYTxV1t-nR-4-90" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.517;entryY=0.985;entryDx=0;entryDy=0;startArrow=classic;startFill=1;entryPerimeter=0;" target="-sm1lzMmFYTxV1t-nR-4-89">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="Внутренняя модель&#xa;данных" plantUmlId="n_11" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Внутренняя модель&#xa;данных (Domain Model)" id="-sm1lzMmFYTxV1t-nR-4-90">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-88" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="53.03708439897699" width="143.47144042786772" x="128.33210838399822" y="127.63865546218487" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_26" plantUmlBaseStyle="strokeColor=#181818;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="-sm1lzMmFYTxV1t-nR-4-105">
+          <mxCell edge="1" parent="-sm1lzMmFYTxV1t-nR-4-78" source="-sm1lzMmFYTxV1t-nR-4-86" style="strokeColor=#181818;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;startArrow=classicThin;startFill=1;startSize=6;" target="-sm1lzMmFYTxV1t-nR-4-89">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-138" connectable="0" parent="-sm1lzMmFYTxV1t-nR-4-105" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Тело запроса / Тело ответа" vertex="1">
+          <mxGeometry relative="1" x="-0.4301" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="4. Трансформировать в Domain Model" plantUmlId="e_32" plantUmlBaseStyle="strokeColor=#181818;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="4. Трансформировать в Domain Model" id="-sm1lzMmFYTxV1t-nR-4-111">
+          <mxCell edge="1" parent="-sm1lzMmFYTxV1t-nR-4-78" source="-sm1lzMmFYTxV1t-nR-4-92" style="strokeColor=light-dark(#181818,#FF9933);fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="-sm1lzMmFYTxV1t-nR-4-90">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="983.51" y="2220" />
+                <mxPoint x="983.51" y="1982.4223602484471" />
+                <mxPoint x="983.51" y="1758.8198757763976" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="Интеграционный модуль (Integration Layer)" plantUmlId="c_12" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#CCE5FF;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Интеграционный модуль (Integration Layer)" id="-sm1lzMmFYTxV1t-nR-4-91">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#CCE5FF;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="190.06211180124222" width="550.1437523841115" x="112.51312380794428" y="2084.9068322981366" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Anti-Corruption Layer (ACL)" plantUmlId="n_13" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Anti-Corruption Layer (ACL)" id="-sm1lzMmFYTxV1t-nR-4-92">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-91" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="45.65217391304348" width="368.1222323575753" x="91.01076001326814" y="111.80124223602485" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Клиенты партнерских API" plantUmlId="n_14" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Клиенты партнерских API&#xa;(Partner API Clients)" id="-sm1lzMmFYTxV1t-nR-4-93">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-91" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="45.65217391304348" width="346.5655250573569" x="101.78911366337732" y="31.67701863354037" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_31" plantUmlBaseStyle="strokeColor=#181818;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="Получить &quot;сырые&quot; DTO" id="-sm1lzMmFYTxV1t-nR-4-110">
+          <mxCell edge="1" parent="-sm1lzMmFYTxV1t-nR-4-91" source="-sm1lzMmFYTxV1t-nR-4-93" style="strokeColor=light-dark(#181818,#FF9933);fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="-sm1lzMmFYTxV1t-nR-4-92">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Изоляция контекста:&#xa;Маппинг внешних DTO&#xa;во внутренние модели" plantUmlId="note_39" plantUmlBaseStyle="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Изоляция контекста:&#xa;Маппинг внешних DTO&#xa;во внутренние модели" id="-sm1lzMmFYTxV1t-nR-4-118">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="52.17391304347826" width="160" x="544.64" y="2227.4534161490683" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="noteptr_40" plantUmlBaseStyle="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=west;" plantUmlBaseValue="" id="-sm1lzMmFYTxV1t-nR-4-119">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=west;" vertex="1">
+            <mxGeometry height="7.453416149068323" width="36" x="509.64" y="2249.813664596273" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-129" edge="1" parent="-sm1lzMmFYTxV1t-nR-4-78" source="-sm1lzMmFYTxV1t-nR-4-127" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=light-dark(#000000,#FF8000);" target="-sm1lzMmFYTxV1t-nR-4-93">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-130" connectable="0" parent="-sm1lzMmFYTxV1t-nR-4-129" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="нет" vertex="1">
+          <mxGeometry relative="1" x="-0.4516" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-127" parent="-sm1lzMmFYTxV1t-nR-4-78" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="Кеш есть?" vertex="1">
+          <mxGeometry height="53.04037267080745" width="90" x="342.59" y="1948.0155279503106" as="geometry" />
+        </mxCell>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-136" edge="1" parent="-sm1lzMmFYTxV1t-nR-4-78" source="-sm1lzMmFYTxV1t-nR-4-135" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=classic;startFill=1;strokeColor=light-dark(#000000,#3399FF);" target="-sm1lzMmFYTxV1t-nR-4-90" value="Чтение данных БД">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="БД" plantUmlId="n_8" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#E2E3E5;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Менеджер кэша&#xa;(Cache Manager)" id="-sm1lzMmFYTxV1t-nR-4-135">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#E2E3E5;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="45.65217391304348" width="76" x="187.52" y="1842.6708074534163" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Менеджер кэша" plantUmlId="n_8" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#E2E3E5;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Менеджер кэша&#xa;(Cache Manager)" id="-sm1lzMmFYTxV1t-nR-4-87">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-78" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#E2E3E5;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="45.65217391304348" width="143.47" x="315.85999999999996" y="1842.6708074534163" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-134" edge="1" parent="-sm1lzMmFYTxV1t-nR-4-78" source="-sm1lzMmFYTxV1t-nR-4-90" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classic;startFill=1;strokeColor=light-dark(#000000,#FF8000);" target="-sm1lzMmFYTxV1t-nR-4-87">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-142" connectable="0" parent="-sm1lzMmFYTxV1t-nR-4-134" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="1. Чтение кеша" vertex="1">
+          <mxGeometry relative="1" x="0.2571" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-137" edge="1" parent="-sm1lzMmFYTxV1t-nR-4-78" source="-sm1lzMmFYTxV1t-nR-4-87" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;startArrow=none;startFill=0;strokeColor=light-dark(#000000,#FF9933);" target="-sm1lzMmFYTxV1t-nR-4-127">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-139" edge="1" parent="-sm1lzMmFYTxV1t-nR-4-78" source="-sm1lzMmFYTxV1t-nR-4-127" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;strokeColor=light-dark(#000000,#FF9933);" target="-sm1lzMmFYTxV1t-nR-4-87">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-sm1lzMmFYTxV1t-nR-4-140" connectable="0" parent="-sm1lzMmFYTxV1t-nR-4-139" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="да" vertex="1">
+          <mxGeometry relative="1" x="0.0733" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="Внешние платные сервисы" plantUmlId="c_17" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#E2E3E5;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Внешние платные сервисы (Partner APIs)" id="-sm1lzMmFYTxV1t-nR-4-96">
+          <mxCell parent="1" style="rounded=1;absoluteArcSize=1;arcSize=5;fillColor=#E2E3E5;strokeColor=#181818;verticalAlign=top;align=center;spacingTop=2;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="99.68944099378882" width="459" x="158.09" y="2349.9978881987577" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="История ремонта ТС" plantUmlId="n_18" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="История ремонта ТС" id="-sm1lzMmFYTxV1t-nR-4-97">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-96" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="42.857142857142854" width="90" x="27" y="34.47204968944099" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="История штрафов" plantUmlId="n_20" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="История штрафов" id="-sm1lzMmFYTxV1t-nR-4-99">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-96" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="42.857142857142854" width="76" x="241.92" y="34.47204968944099" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Рыночная стоимость ТС" plantUmlId="n_19" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Рыночная стоимость ТС" id="-sm1lzMmFYTxV1t-nR-4-98">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-96" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="45.65" width="90" x="134.92" y="34.47" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Антифрод система" plantUmlId="n_21" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Антифрод система" id="-sm1lzMmFYTxV1t-nR-4-100">
+          <mxCell parent="-sm1lzMmFYTxV1t-nR-4-96" style="rounded=1;absoluteArcSize=1;arcSize=6;fillColor=#F1F1F1;strokeColor=#181818;fontSize=14;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="46" width="90" x="336" y="34.12211180124223" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="3. Получить &quot;сырые&quot; DTO" plantUmlId="e_33" plantUmlBaseStyle="strokeColor=#181818;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="HTTPS API Call" id="-sm1lzMmFYTxV1t-nR-4-112">
+          <mxCell edge="1" parent="1" source="-sm1lzMmFYTxV1t-nR-4-92" style="strokeColor=light-dark(#181818,#FFB366);fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=classicThin;startFill=1;startSize=6;" target="-sm1lzMmFYTxV1t-nR-4-96">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
