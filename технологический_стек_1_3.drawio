@@ -354,14 +354,6 @@
         <mxCell id="t-ext-api" parent="1" style="rounded=1;arcSize=9;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#7F7F7F;strokeWidth=2;fontColor=#333333;fontSize=10.2;fontStyle=1;align=center;verticalAlign=middle;spacing=4;" vertex="1" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;API смежных сервисов&lt;/font&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px; font-weight: normal; color: rgb(11, 83, 148);&quot;&gt;REST / HTTPS&lt;/span&gt;">
           <mxGeometry height="80" width="232" x="2095" y="1325" as="geometry" />
         </mxCell>
-        <mxCell id="t-wh" edge="1" parent="1" source="n6" target="n16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;dashed=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="2388" y="1317" />
-              <mxPoint x="2388" y="371" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="t-portal" parent="1" style="rounded=1;arcSize=9;whiteSpace=wrap;html=1;fillColor=#DDEBF7;strokeColor=#2F5597;strokeWidth=2;fontColor=#17365D;fontSize=12.5;fontStyle=1;align=center;verticalAlign=middle;spacing=4;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Порталы и системы-потребители&lt;/font&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px; font-weight: normal; color: rgb(11, 83, 148);&quot;&gt;виджет «колокольчик» (Lit) · Spring Boot Starter&lt;/span&gt;" vertex="1">
           <mxGeometry height="100" width="412" x="1903.0" y="126" as="geometry" />
         </mxCell>
@@ -385,15 +377,6 @@
         </mxCell>
         <mxCell id="t-gsync-e" edge="1" parent="1" source="t-gsync" target="n16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.615;entryY=1;entryDx=0;entryDy=0;" value="">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="t-as-ext" edge="1" parent="1" source="n26" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;exitX=1;exitY=0.8;exitDx=0;exitDy=0;entryX=0.975;entryY=0;entryDx=0;entryDy=0;" value="">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="2340" y="813" />
-              <mxPoint x="2340" y="1240" />
-              <mxPoint x="2299" y="1240" />
-            </Array>
-          </mxGeometry>
         </mxCell>
         <mxCell id="t-leg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F3F6;strokeColor=#9AA3AF;dashed=1;dashPattern=6 4;strokeWidth=1.5;" value="" vertex="1">
           <mxGeometry height="200" width="2312" x="44.5" y="1690" as="geometry" />
@@ -458,16 +441,7 @@
         <mxCell id="t-lgt8" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;" value="Вызов или обмен данными" vertex="1">
           <mxGeometry height="32" width="360" x="1507" y="1793" as="geometry" />
         </mxCell>
-        <mxCell id="t-lg9" edge="1" parent="1" value="" style="html=1;strokeWidth=2;endArrow=classic;dashed=1;">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1885" y="1809" as="sourcePoint" />
-            <mxPoint x="1945" y="1809" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="t-lgt9" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;" value="Вебхуки и входящие сообщения" vertex="1">
-          <mxGeometry height="32" width="360" x="1957" y="1793" as="geometry" />
-        </mxCell>
-        <mxCell id="t-leg-n" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontColor=#404040;" value="Spring Boot — Java 25 + Spring Boot 4. Между сервисами — gRPC, события — Kafka. «Колокольчик» доставляется через Bell Inbox API, внешнего провайдера нет. Версии и обоснование выбора — раздел 10 описания." vertex="1">
+        <mxCell id="t-leg-n" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontColor=#404040;" value="Spring Boot — Java 25 + Spring Boot 4. Между сервисами — gRPC, события — Kafka. С внешними каналами и ресурсами работает только delivery-service, в обе стороны: отправка, квитанции, входящие сообщения, вызовы LLM, чтение шары и API смежных сервисов. Версии и обоснование выбора — раздел 10 описания." vertex="1">
           <mxGeometry height="32" width="2230" x="85" y="1842" as="geometry" />
         </mxCell>
       </root>
