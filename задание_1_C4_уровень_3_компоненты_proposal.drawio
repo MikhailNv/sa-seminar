@@ -1,0 +1,196 @@
+<mxfile host="app.diagrams.net" agent="drawio-c4-generator">
+  <diagram name="C4 Level 3 - Компоненты Proposal Service" id="c4-diagram">
+    <mxGraphModel dx="2010" dy="1317" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1500" pageHeight="1350" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="svc" parent="1" style="rounded=1;fontSize=11;whiteSpace=wrap;html=1;dashed=1;arcSize=20;fillColor=none;strokeColor=#666666;fontColor=#333333;labelBackgroundColor=none;align=left;verticalAlign=top;spacingTop=4;spacing=10;dashPattern=8 4;metaEdit=1;rotatable=0;perimeter=rectanglePerimeter;noLabel=0;labelPadding=0;allowArrows=0;connectable=0;expand=0;recursiveResize=0;editable=1;pointerEvents=0;absoluteArcSize=1;fontStyle=1;" value="Proposal Service [Container: Spring Boot / Java]" vertex="1">
+          <mxGeometry height="920" width="1052" x="-12" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="igw" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=11;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="Internal Gateway / BFF&lt;br&gt;[Container]" vertex="1">
+          <mxGeometry height="80" width="180" x="-241" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="api" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="Proposal REST API&lt;br&gt;[Component: Controller]&lt;br&gt;&lt;font style=&#39;font-size:9px&#39;&gt;POST /proposals/calculate, GET /proposals/{id}&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="300" x="300" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="handler" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="CalculateProposalHandler&lt;br&gt;[Component: Application Service]&lt;br&gt;&lt;font style=&#39;font-size:9px&#39;&gt;оркестрация расчёта и смена статусов&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="300" x="300" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="engine" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="PremiumCalculationEngine&lt;br&gt;[Component: Domain Service]&lt;br&gt;&lt;font style=&#39;font-size:9px&#39;&gt;формула премии и коэффициенты&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="250" x="700" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="risk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="UnderwritingRoutingPolicy&lt;br&gt;[Component: Domain Service]&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;risk-score и правило &quot;в андеррайтинг&quot;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="250" x="700" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="customer_client" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="CustomerClient&lt;br&gt;[Component: REST Client]" vertex="1">
+          <mxGeometry height="70" width="200" x="700" y="422" as="geometry" />
+        </mxCell>
+        <mxCell id="product_client" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="ProductClient&lt;br&gt;[Component: REST Client]" vertex="1">
+          <mxGeometry height="70" width="200" x="700" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="integration_client" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="IntegrationClient&lt;br&gt;[Component: REST Client]" vertex="1">
+          <mxGeometry height="70" width="200" x="700" y="622" as="geometry" />
+        </mxCell>
+        <mxCell id="reference_client" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="ReferenceDataClient&lt;br&gt;[Component: REST + Cache]" vertex="1">
+          <mxGeometry height="70" width="200" x="700" y="724" as="geometry" />
+        </mxCell>
+        <mxCell id="customer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=11;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="Customer Service&lt;br&gt;[Container]" vertex="1">
+          <mxGeometry height="70" width="220" x="1080" y="422" as="geometry" />
+        </mxCell>
+        <mxCell id="product" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=11;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="Product Service&lt;br&gt;[Container]" vertex="1">
+          <mxGeometry height="70" width="220" x="1080" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="integration" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=11;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="Integration Service&lt;br&gt;[Container]" vertex="1">
+          <mxGeometry height="70" width="220" x="1080" y="622" as="geometry" />
+        </mxCell>
+        <mxCell id="reference" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=11;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="Reference Data Service&lt;br&gt;[Container]" vertex="1">
+          <mxGeometry height="70" width="220" x="1080" y="724" as="geometry" />
+        </mxCell>
+        <mxCell id="repository" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="ProposalRepository&lt;br&gt;[Component: Repository]" vertex="1">
+          <mxGeometry height="80" width="240" x="300" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="outbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="OutboxRelay&lt;br&gt;[Component: Publisher]&lt;br&gt;&lt;font style=&#39;font-size:9px&#39;&gt;ProposalChanged, UnderwritingRequested&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="250" x="700" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="retry" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="RetryScheduler&lt;br&gt;[Component: Scheduler]&lt;br&gt;&lt;font style=&#39;font-size:9px&#39;&gt;повтор WAITING_EXTERNAL_DATA&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="172" x="18" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="state" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="ProposalStateMachine&lt;br&gt;[Component: Domain]&lt;br&gt;&lt;font style=&#39;font-size:9px&#39;&gt;CALCULATED, PENDING_UNDERWRITING, ...&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="300" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="projection" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf2fb;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="DocumentDataProjection&lt;br&gt;[Component: Query Handler]&lt;br&gt;&lt;font style=&#39;font-size:9px&#39;&gt;GET /proposals/{id}/document-data; читает ProposalRepository&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="260" x="40" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="proposal_db" parent="1" style="shape=cylinder3;size=15;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;" value="Proposal DB&lt;br&gt;[Container: PostgreSQL]" vertex="1">
+          <mxGeometry height="80" width="220" x="1080" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="broker" parent="1" style="shape=cylinder3;size=15;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=10;fontStyle=1;" value="Message Broker&lt;br&gt;[Container: Kafka]" vertex="1">
+          <mxGeometry height="90" width="220" x="1080" y="850" as="geometry" />
+        </mxCell>
+        <mxCell id="document" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#333333;fontSize=11;fontStyle=1;verticalAlign=middle;align=center;spacing=4;" value="Document Service&lt;br&gt;[Container]" vertex="1">
+          <mxGeometry height="80" width="260" x="40" y="978" as="geometry" />
+        </mxCell>
+        <mxCell id="e_api" edge="1" parent="1" source="igw" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="api" value="REST/JSON">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <object label="запуск расчета предложения" id="e_api_handler">
+          <mxCell edge="1" parent="1" source="api" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="handler">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="расчет" id="e_handler_engine">
+          <mxCell edge="1" parent="1" source="handler" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.3;entryX=0;entryY=0.5;" target="engine">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="оценка риска" id="e_engine_risk">
+          <mxCell edge="1" parent="1" source="engine" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="risk">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="получить данные о клиенте" id="e_handler_customer">
+          <mxCell edge="1" parent="1" source="handler" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1.002;exitY=0.7;entryX=0;entryY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="customer_client">
+            <mxGeometry relative="1" x="1" y="52" as="geometry">
+              <mxPoint x="22" y="5" as="offset" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object label="получить данные о тарифе" id="e_handler_product">
+          <mxCell edge="1" parent="1" source="handler" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=0.999;exitY=0.697;entryX=0;entryY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="product_client">
+            <mxGeometry relative="1" x="1" y="52" as="geometry">
+              <mxPoint x="21" y="4" as="offset" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object label="получить внешние данные" id="e_handler_integration">
+          <mxCell edge="1" parent="1" source="handler" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.697;entryX=0;entryY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="integration_client">
+            <mxGeometry relative="1" x="1" y="50" as="geometry">
+              <mxPoint x="23" y="6" as="offset" />
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <object label="получить словари" id="e_handler_ref">
+          <mxCell edge="1" parent="1" source="handler" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.697;entryX=-0.001;entryY=0.525;exitDx=0;exitDy=0;exitPerimeter=0;entryDx=0;entryDy=0;entryPerimeter=0;" target="reference_client">
+            <mxGeometry relative="1" x="1" y="51" as="geometry">
+              <mxPoint x="3" as="offset" />
+              <Array as="points">
+                <mxPoint x="650.3" y="319.7" />
+                <mxPoint x="650.3" y="760.8" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <mxCell id="e_customer" edge="1" parent="1" source="customer_client" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="customer" value="REST">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_product" edge="1" parent="1" source="product_client" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="product" value="REST">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_integration" edge="1" parent="1" source="integration_client" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="integration" value="REST">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_reference" edge="1" parent="1" source="reference_client" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="reference" value="REST">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <object label="сохранение предложения" id="e_handler_repo">
+          <mxCell edge="1" parent="1" source="handler" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=0.35;exitY=1;entryX=0.5;entryY=0;" target="repository">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="420" y="350" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </object>
+        <mxCell id="e_repo_db" edge="1" parent="1" source="repository" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="proposal_db" value="JDBC">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="580" y="540" />
+              <mxPoint x="580" y="990" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_handler_outbox" edge="1" parent="1" source="handler" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitDx=0;exitDy=0;" target="outbox" value="outbox, одна транзакция">
+          <mxGeometry relative="1" x="1" y="60" as="geometry">
+            <mxPoint x="32" y="9" as="offset" />
+            <Array as="points">
+              <mxPoint x="665" y="300" />
+              <mxPoint x="665" y="354" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_outbox_broker" edge="1" parent="1" source="outbox" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;dashed=1;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" target="broker" value="события">
+          <mxGeometry relative="1" x="-0.1799" as="geometry">
+            <Array as="points">
+              <mxPoint x="1339.2" y="354" />
+              <mxPoint x="1339.2" y="895" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_retry_handler" edge="1" parent="1" source="retry" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="handler" value="повторная команда">
+          <mxGeometry relative="1" x="-0.0769" y="12" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="225" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_projection_doc" edge="1" parent="1" source="projection" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="document" value="REST">
+          <mxGeometry relative="1" x="-0.131" as="geometry" />
+        </mxCell>
+        <mxCell id="e_state_repo" edge="1" parent="1" source="state" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" target="repository" value="переходы статусов">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <object label="изменение статуса" id="e_handler_state">
+          <mxCell edge="1" parent="1" source="handler" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;elbow=vertical;metaEdit=1;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;labelBackgroundColor=#FFFFFF;exitX=0;exitY=0.8;entryX=0;entryY=0.5;" target="state">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="230.4" y="330" />
+                <mxPoint x="230.4" y="690" />
+              </Array>
+            </mxGeometry>
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
